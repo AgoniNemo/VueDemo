@@ -1,5 +1,6 @@
 <template>
-  <el-row>
+ <div>
+    <el-row>
     <el-col :span="24" class="header">
       <dropdown trigger="hover" ref="dropdownView">
         <div class="image">
@@ -16,8 +17,9 @@
         </div>
       </dropdown>
     </el-col>
-    <router-view></router-view>
   </el-row>
+  <router-view></router-view>
+ </div>
 </template>
 <script type="text/ecmascript-6">
 import url from '@/assets/header.jpg';
@@ -31,6 +33,9 @@ export default {
     methods: {
       informationManger() {
          console.log('资料管理');
+        let dropdown = this.$refs.dropdownView;
+        dropdown.isShow = false;
+        this.$router.push({ path: '/' });
       },
       collectionVideo() {
         console.log('收藏影片');

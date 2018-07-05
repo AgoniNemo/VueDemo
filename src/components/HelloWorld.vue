@@ -10,6 +10,8 @@ export default {
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 .hello
+  position: relative
+  top: 10px
   width: 100%
   height: 100px
   background: red
