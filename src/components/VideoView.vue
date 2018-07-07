@@ -6,18 +6,21 @@
     </el-carousel-item>
   </el-carousel>
   <div class="content">
-    <el-row :gutter="20">
-      <el-col :span="4" v-for="video in 30" :key="video">
+    <el-row :gutter="20" v-loading.fullscreen.lock="loading"
+          element-loading-text="努力加载中" v-for="cols in rows" :key="cols.id">
+      <el-col :span="span" v-for="video in cols" :key="video.id">
+        <a @click.stop="imaegClick(video)">
           <el-card :body-style="{ padding: '5px' }" shadow="hover">
             <img :src=imageUrl class="image">
             <div style="padding: 10px 0px;">
-              <span style="display: block; height: 40px; overflow: hidden; white-space:pre-wrap;">这是一个标题</span>
+              <span style="display: block; height: 40px; overflow: hidden; white-space:pre-wrap;">这是{{video}}标题</span>
               <div class="bottom">
                 <span class="time">时间</span>
                 <span class="views">观看10次</span>
               </div>
             </div>
           </el-card>
+        </a>
       </el-col>
     </el-row>
   </div>
@@ -30,10 +33,38 @@
 
 import url from '@/assets/header.jpg';
 export default {
+  data() {
+    return {
+      span: 4,
+      loading: false,
+      videos: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    };
+  },
+  methods: {
+    imaegClick(video) {
+      console.log(video);
+      this.loading = true;
+    }
+  },
   computed: {
     imageUrl() {
-            return url;
+          return url;
+    },
+    rows() {
+      let col = 24 / this.span;
+      let result = [];
+      let total = [];
+      for (let index = 0; index < this.videos.length; index++) {
+        const element = this.videos[index];
+        result.push(element);
+        if (result.length % col === 0) {
+          total.push(result);
+          result = [];
         }
+      }
+      console.log(total);
+      return total;
+    }
   }
 };
 </script>
@@ -52,5 +83,9 @@ export default {
         background-color: #d3dce6;
 .content
   padding: 10px
+  .el-col
+    margin-top: 10px
+  .el-card
+    min-height: 261px
 
 </style>
