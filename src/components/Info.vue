@@ -1,19 +1,25 @@
 <template>
   <div class="info">
-    <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
-      <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
-      <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
-      <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
-    </el-tabs>
+    <div class="image-container">
+      <div class="image">
+        <img :src="imageUrl">
+      </div>
+      <div class="text-container">这是文字</div>
+    </div>
   </div>
 </template>
 <script type="text/ecmascript-6">
+import url from '@/assets/header.jpg';
 export default {
     data() {
       return {
         activeName: 'second'
       };
+    },
+    computed: {
+      imageUrl() {
+          return url;
+      }
     },
     methods: {
       handleClick(tab, event) {
@@ -23,4 +29,16 @@ export default {
 };
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
+.image-container
+  background: red;
+  .image
+    background: #ffffff
+    display: inline-block;
+    width: 48px
+    height: 48px
+    vertical-align:text-top;
+  .text-container
+    display: inline-block;
+    margin-left: 20px;
+    padding-top: 20px;
 </style>
